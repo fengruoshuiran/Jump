@@ -9,9 +9,9 @@ namespace Jump
 
         private PlayerControl playerControl;
         private MoveCamera moveCamera;
-        private TextUpdater textUpdater;
 
         private int counter;
+        private int konamiCommandCounter;
 
         private const float MaxPlayerOffsetOnBoxA = 1.851013236F;
         private const float MaxPlayerOffsetOnBoxB = 1.851013236F;
@@ -23,6 +23,7 @@ namespace Jump
             moveCamera = JumpResources.mainCamera.gameObject.GetComponent<MoveCamera>();
 
             counter = 0;
+            konamiCommandCounter = 0;
         }
 
         // Update is called once per frame
@@ -69,6 +70,8 @@ namespace Jump
             {
                 if (JumpResources.player.CanGettingThinner()) JumpResources.player.GettingThinner();
             }
+
+            KonamiCommand();
         }
 
 
@@ -93,6 +96,52 @@ namespace Jump
 
             if (IsOnAVector && IsOnBVector) return true;
             else return false;
+        }
+
+        private void KonamiCommand()
+        {
+            if (Input.GetKeyDown(KonamiCommandCheckMap()))
+            {
+                konamiCommandCounter++;
+                if (konamiCommandCounter == 10) Setting.isCheat = true;
+            }
+            else if (Input.anyKeyDown)
+            {
+                konamiCommandCounter = 0;
+            }
+        }
+
+        private KeyCode KonamiCommandCheckMap()
+        {
+            if (konamiCommandCounter == 0 || konamiCommandCounter == 1)
+            {
+                // up
+                return KeyCode.JoystickButton15;
+            }
+            else if (konamiCommandCounter == 2 || konamiCommandCounter == 3)
+            {
+                // down
+                return KeyCode.Joystick1Button12;
+            }
+            else if (konamiCommandCounter == 4 || konamiCommandCounter == 6) {
+                // left
+                return KeyCode.JoystickButton14;
+            }
+            else if (konamiCommandCounter == 5 || konamiCommandCounter == 7)
+            {
+                // right
+                return KeyCode.Joystick1Button13;
+            }
+            else if (konamiCommandCounter == 8)
+            {
+                // B
+                return KeyCode.Joystick1Button0;
+            }
+            else
+            {
+                // A
+                return KeyCode.Joystick1Button1;
+            }
         }
     }
 }
