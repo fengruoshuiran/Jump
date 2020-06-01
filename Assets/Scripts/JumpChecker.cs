@@ -9,8 +9,12 @@ namespace Jump
 
         private PlayerControl playerControl;
         private MoveCamera moveCamera;
+        private TextUpdater textUpdater;
 
         private int counter;
+
+        private const float MaxPlayerOffsetOnBoxA = 1.851013236F;
+        private const float MaxPlayerOffsetOnBoxB = 1.851013236F;
 
         // Start is called before the first frame update
         void Start()
@@ -52,7 +56,6 @@ namespace Jump
                 else if (IsOnNextBox())
                 {
                     JumpResources.score++;
-
                     JumpResources.TrashOldBox();
 
                     moveCamera.MoveByABPoint(JumpResources.player.A, JumpResources.player.B);
@@ -83,8 +86,8 @@ namespace Jump
         private bool IsOnBox(int boxId)
         {
             playerControl.UpdateOffsetByBoxId(boxId);
-            var IsOnAVector = Math.Abs(JumpResources.player.OffsetA) < JumpResources.MaxPlayerOffsetOnBoxA;
-            var IsOnBVector = Math.Abs(JumpResources.player.OffsetB) < JumpResources.MaxPlayerOffsetOnBoxB;
+            var IsOnAVector = Math.Abs(JumpResources.player.OffsetA) < MaxPlayerOffsetOnBoxA;
+            var IsOnBVector = Math.Abs(JumpResources.player.OffsetB) < MaxPlayerOffsetOnBoxB;
 
             //Debug.Log($"{IsOnAVector}, {IsOnBVector}");
 

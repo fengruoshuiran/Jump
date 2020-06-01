@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Jump
 {
@@ -24,20 +25,16 @@ namespace Jump
 
         public const int MaxBoxCount = 10;
 
-        public const float MaxPlayerOffsetOnBoxA = 1.851013236F;
-        public const float MaxPlayerOffsetOnBoxB = 1.851013236F;
-
         public static void Awake()
         {
             boxList = new List<Box>();
             trashBoxList = new List<Box>();
             player = new Player(GameObject.Find("Player"));
+            mainCamera = new MainCamera(GameObject.Find("Main Camera"));
 
             score = 0;
 
             boxCreated = 0;
-
-            mainCamera = new MainCamera(GameObject.Find("Main Camera"));
 
             Application.targetFrameRate = Setting.FrameRate;
         }
