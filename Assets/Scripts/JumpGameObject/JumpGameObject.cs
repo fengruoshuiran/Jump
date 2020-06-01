@@ -13,7 +13,7 @@ namespace Jump
         public JumpGameObject(GameObject jumpGameObject, float a, float b)
         {
             this.gameObject = jumpGameObject;
-            setABVector(a, b);
+            SetABVector(a, b);
         }
 
         public JumpGameObject(GameObject jumpGameObject)
@@ -23,13 +23,13 @@ namespace Jump
             B = 0;
         }
 
-        public void addABVector(float a, float b)
+        public void AddABVector(float a, float b)
         {
             float setA = A + a;
             float setB = B + b;
-            setABVector(setA, setB);
+            SetABVector(setA, setB);
         }
-        public void setABVector(float a, float b)
+        public void SetABVector(float a, float b)
         {
             A = a;
             B = b;

@@ -32,7 +32,7 @@ namespace Jump
                 else
                 {
                     leftMoveFrame--;
-                    JumpResources.mainCamera.addABVector(SlideAVectorPerFrame, SlideBVectorPerFrame);
+                    JumpResources.mainCamera.AddABVector(SlideAVectorPerFrame, SlideBVectorPerFrame);
                 }
             }
         }
@@ -54,7 +54,7 @@ namespace Jump
         // for test
         private void TeleportByABPoint(float a, float b)
         {
-            JumpResources.mainCamera.setABVector(a, b);
+            JumpResources.mainCamera.SetABVector(a, b);
         }
 
         private void SlideByABPoint(float a, float b)

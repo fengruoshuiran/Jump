@@ -19,7 +19,7 @@ namespace Jump
         {
             ControlLock = false;
 
-            setPlayerSetting(JumpResources.player.gameObject);
+            JumpResources.player.SetPlayerInitSetting();
         }
 
         void Update()
@@ -30,13 +30,13 @@ namespace Jump
                 {
                     isJumping = false;
                     ControlLock = false;
-                    JumpResources.player.setABVector(aimAPosition, aimBPosition);
+                    JumpResources.player.SetABVector(aimAPosition, aimBPosition);
                     //Debug.Log($"{aimAPosition}, {aimBPosition}");
                 }
                 else
                 {
-                    JumpResources.player.addABVector(slideAVectorPerFrame, slideBVectorPerFrame);
-                    JumpResources.player.MoveByYVector(getFloatHeightPerFrame());
+                    JumpResources.player.AddABVector(slideAVectorPerFrame, slideBVectorPerFrame);
+                    JumpResources.player.MoveByYVector(GetFloatHeightPerFrame());
                     leftMoveFrame--;
                 }
             }
@@ -44,7 +44,7 @@ namespace Jump
 
         public void UpdateOffset()
         {
-            UpdateOffsetByBoxId(JumpResources.currentBox);
+            UpdateOffsetByBoxId(JumpResources.CurrentBox);
         }
 
         public void UpdateOffsetByBoxId(int boxId)
@@ -73,7 +73,7 @@ namespace Jump
         // For test
         private void TeleportByABVector(float a, float b)
         {
-            JumpResources.player.addABVector(a, b);
+            JumpResources.player.AddABVector(a, b);
         }
 
         private void JumpStart()
@@ -94,15 +94,12 @@ namespace Jump
 
         }
 
-        private float getFloatHeightPerFrame()
+        private float GetFloatHeightPerFrame()
         {
             //Debug.Log($"{fullMoveFrame}, {leftMoveFrame}");
             return Setting.FloatVelocity * (1.0F - (fullMoveFrame - leftMoveFrame) * 2.0F / fullMoveFrame);
         }
 
-        private void setPlayerSetting(GameObject player)
-        {
-            player.GetComponent<SpriteRenderer>().color = new Color(Random.value, Random.value, Random.value);
-        }
+
     }
 }

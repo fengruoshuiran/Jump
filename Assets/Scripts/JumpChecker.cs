@@ -12,9 +12,6 @@ namespace Jump
 
         private int counter;
 
-        private const float jumpRate = Setting.Rate * 0.01F;
-        private const float MaxJumpDistance = Setting.Rate * 15F;
-
         // Start is called before the first frame update
         void Start()
         {
@@ -36,9 +33,9 @@ namespace Jump
                 }
                 else if (counter != 0)
                 {
-                    float jumpDistence = Mathf.Min(jumpRate * counter, MaxJumpDistance);
+                    float jumpDistence = Mathf.Min(Setting.jumpRate * counter, Setting.MaxJumpDistance);
 
-                    if (JumpResources.boxList[JumpResources.nextBox].direction == Setting.Adirection)
+                    if (JumpResources.boxList[JumpResources.NextBox].direction == Setting.Adirection)
                     {
                         playerControl.JumpByABVector(jumpDistence, 0);
                     }
@@ -48,25 +45,24 @@ namespace Jump
                     }
                     counter = 0;
                 }
+
+                if (IsOnCurrentBox()) { }
+                else if (IsOnNextBox())
+                {
+                    JumpResources.score++;
+
+                    JumpResources.boxList[JumpResources.CurrentBox].ChangeAlphaColorQuarter();
+                    JumpResources.boxList[JumpResources.NextBox].ChangeAlphaColorFull();
+
+                    JumpResources.trashBoxList.Add(JumpResources.boxList[JumpResources.CurrentBox]);
+                    JumpResources.boxList.RemoveAt(JumpResources.CurrentBox);
+                    
+
+                    moveCamera.MoveByABPoint(JumpResources.player.A, JumpResources.player.B);
+                }
                 else
                 {
-                    if (IsOnCurrentBox())
-                    {
-
-                    }
-                    else if (IsOnNextBox())
-                    {
-                        JumpResources.score++;
-
-                        JumpResources.trashBoxList.Add(JumpResources.boxList[JumpResources.currentBox]);
-                        JumpResources.boxList.RemoveAt(JumpResources.currentBox);
-
-                        moveCamera.MoveByABPoint(JumpResources.player.A, JumpResources.player.B);
-                    }
-                    else
-                    {
-                        if (!Setting.isCheat) SceneManager.LoadScene("Jump");
-                    }
+                    if (!Setting.isCheat) SceneManager.LoadScene("Jump");
                 }
             }
         }
@@ -74,12 +70,12 @@ namespace Jump
 
         private bool IsOnCurrentBox()
         {
-            return IsOnBox(JumpResources.currentBox);
+            return IsOnBox(JumpResources.CurrentBox);
         }
 
         private bool IsOnNextBox()
         {
-            return IsOnBox(JumpResources.nextBox);
+            return IsOnBox(JumpResources.NextBox);
         }
 
 

@@ -19,8 +19,10 @@ namespace Jump
             GameObject currentBoxGameObject = GameObject.Find("/Box1");
 
             var currentBox = new Box(currentBoxGameObject, 0, 0, true);
+
             JumpResources.boxCreated++;
-            setBoxSettings(currentBox);
+            currentBox.SetBoxInitSettings();
+            currentBox.ChangeAlphaColorFull();
             JumpResources.boxList.Add(currentBox);
         }
 
@@ -54,23 +56,13 @@ namespace Jump
             var a = OffsetA + lastBox.A;
             var b = OffsetB + lastBox.B;
             var newBox = new Box(newBoxGameObject, a, b, dir);
+
             // Waring: Maybe out of Range
             JumpResources.boxCreated++;
 
-            setBoxSettings(newBox);
+            newBox.SetBoxInitSettings();
 
             return newBox;
-        }
-
-        private void setBoxSettings(Box box)
-        {
-            // Put new box behind currentBox
-            box.gameObject.GetComponent<Renderer>().sortingOrder--;
-            // Draw new box random color
-            box.gameObject.GetComponent<SpriteRenderer>().color = new Color(Random.value, Random.value, Random.value);
-
-            box.gameObject.name = $"Box{JumpResources.boxCreated}";
-
         }
     }
 }

@@ -19,7 +19,12 @@ namespace Jump
             var a = ABVector.x;
             var b = ABVector.y;
 
-            addABVector(a, b);
+            AddABVector(a, b);
+        }
+
+        public void SetPlayerInitSetting()
+        {
+            gameObject.GetComponent<SpriteRenderer>().color = new Color(Random.value, Random.value, Random.value);
         }
     }
 }

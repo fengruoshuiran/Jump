@@ -15,8 +15,8 @@ namespace Jump
 
         public static int boxCreated ;
 
-        public const int currentBox = 0;
-        public const int nextBox = 1;
+        public const int CurrentBox = 0;
+        public const int NextBox = 1;
         public static int lastBox
         {
             get { return boxList.Count - 1; }
@@ -38,6 +38,8 @@ namespace Jump
             boxCreated = 0;
 
             mainCamera = new MainCamera(GameObject.Find("Main Camera"));
+
+            Application.targetFrameRate = 60;
         }
     }
 }
