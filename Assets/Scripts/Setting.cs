@@ -7,10 +7,16 @@ namespace Jump
     public static class Setting
     {
         public const float Rate = 1.0F;
-        public const float MoveTime = Rate * 30.0F;
         public const float FloatVelocity = Rate * 3.0F;
-        public const float jumpRate = Setting.Rate * 0.1F;
-        public const float MaxJumpDistance = Setting.Rate * 15F;
+        public const float jumpRate = Rate * 0.1F;
+        public const float MaxJumpDistance = Rate * 15F;
+
+        public const float MaxPlayerScaleChangeRate = 0.5F;
+
+        public const int FrameRate = 60;
+        public const int MoveTime = FrameRate / 2;
+        public const int MaxJumpTime = (int)(MaxJumpDistance / jumpRate);
+        public const int MaxRecoveryTime = MoveTime / 2;
 
         public const KeyCode jumpKey = KeyCode.Space;
 

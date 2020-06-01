@@ -80,7 +80,7 @@ namespace Jump
         {
             isJumping = true;
             ControlLock = true;
-            leftMoveFrame = (int)Setting.MoveTime;
+            leftMoveFrame = Setting.MoveTime;
             fullMoveFrame = leftMoveFrame;
         }
         private void SlideStart(float aVector, float bVector)

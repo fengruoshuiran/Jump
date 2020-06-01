@@ -30,6 +30,8 @@ namespace Jump
                 {
                     //Waring: Maybe out of range
                     counter++;
+
+                    if (JumpResources.player.CanGettingFatter()) JumpResources.player.GettingFatter();
                 }
                 else if (counter != 0)
                 {
@@ -51,12 +53,7 @@ namespace Jump
                 {
                     JumpResources.score++;
 
-                    JumpResources.boxList[JumpResources.CurrentBox].ChangeAlphaColorQuarter();
-                    JumpResources.boxList[JumpResources.NextBox].ChangeAlphaColorFull();
-
-                    JumpResources.trashBoxList.Add(JumpResources.boxList[JumpResources.CurrentBox]);
-                    JumpResources.boxList.RemoveAt(JumpResources.CurrentBox);
-                    
+                    JumpResources.TrashOldBox();
 
                     moveCamera.MoveByABPoint(JumpResources.player.A, JumpResources.player.B);
                 }
@@ -64,6 +61,10 @@ namespace Jump
                 {
                     if (!Setting.isCheat) SceneManager.LoadScene("Jump");
                 }
+            }
+            else if (counter == 0)
+            {
+                if (JumpResources.player.CanGettingThinner()) JumpResources.player.GettingThinner();
             }
         }
 

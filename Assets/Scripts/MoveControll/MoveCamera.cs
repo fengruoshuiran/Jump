@@ -70,7 +70,7 @@ namespace Jump
         private void SlideStart(float aVector, float bVector)
         {
             isSliding = true;
-            leftMoveFrame = (int)Setting.MoveTime;
+            leftMoveFrame = Setting.MoveTime;
             SlideAVectorPerFrame = aVector / leftMoveFrame;
             SlideBVectorPerFrame = bVector / leftMoveFrame;
         }

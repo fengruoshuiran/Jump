@@ -39,7 +39,16 @@ namespace Jump
 
             mainCamera = new MainCamera(GameObject.Find("Main Camera"));
 
-            Application.targetFrameRate = 60;
+            Application.targetFrameRate = Setting.FrameRate;
+        }
+
+        public static void TrashOldBox()
+        {
+            boxList[JumpResources.CurrentBox].ChangeAlphaColorQuarter();
+            boxList[JumpResources.NextBox].ChangeAlphaColorFull();
+
+            trashBoxList.Add(JumpResources.boxList[JumpResources.CurrentBox]);
+            boxList.RemoveAt(JumpResources.CurrentBox);
         }
     }
 }
