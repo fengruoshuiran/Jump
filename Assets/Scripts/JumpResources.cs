@@ -13,6 +13,7 @@ namespace Jump
         public static MainCamera mainCamera;
 
         public static int score;
+        public static int scoreRate;
 
         public static int boxCreated ;
 
@@ -33,6 +34,7 @@ namespace Jump
             mainCamera = new MainCamera(GameObject.Find("Main Camera"));
 
             score = 0;
+            scoreRate = Setting.defaultScoreRate;
 
             boxCreated = 0;
 

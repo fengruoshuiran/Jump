@@ -31,7 +31,7 @@ namespace Jump
 
         public void SetPlayerInitSetting()
         {
-            gameObject.GetComponent<SpriteRenderer>().color = new Color(Random.value, Random.value, Random.value);
+            SetRandomLightColor();
         }
 
 

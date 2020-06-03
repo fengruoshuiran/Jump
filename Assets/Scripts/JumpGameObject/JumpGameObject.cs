@@ -35,5 +35,10 @@ namespace Jump
             B = b;
             gameObject.transform.position = Transformation.ABVectorToWorldPoint(a, b);
         }
+
+        public void SetRandomLightColor()
+        {
+            gameObject.GetComponent<SpriteRenderer>().color = new Color(Random.Range(0.5F, 1F), Random.Range(0.5F, 1F), Random.Range(0.5F, 1F));
+        }
     }
 }

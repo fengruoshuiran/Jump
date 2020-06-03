@@ -11,7 +11,10 @@ namespace Jump
         private MoveCamera moveCamera;
 
         private int counter;
+        private int jumpFreeTime;
         private int konamiCommandCounter;
+
+        private const int MaxPerfectJumpTime = Setting.MoveTime * 2;
 
         private const float MaxPlayerOffsetOnBoxA = 1.851013236F;
         private const float MaxPlayerOffsetOnBoxB = 1.851013236F;
@@ -23,6 +26,7 @@ namespace Jump
             moveCamera = JumpResources.mainCamera.gameObject.GetComponent<MoveCamera>();
 
             counter = 0;
+            jumpFreeTime = 0;
             konamiCommandCounter = 0;
         }
 
@@ -40,40 +44,74 @@ namespace Jump
                 }
                 else if (counter != 0)
                 {
-                    float jumpDistence = Mathf.Min(Setting.jumpRate * counter, Setting.MaxJumpDistance);
-
-                    if (JumpResources.boxList[JumpResources.NextBox].direction == Setting.Adirection)
-                    {
-                        playerControl.JumpByABVector(jumpDistence, 0);
-                    }
-                    else // BoxStore.BoxList[NextBox].direction == Setting.Bdirection
-                    {
-                        playerControl.JumpByABVector(0, jumpDistence);
-                    }
-                    counter = 0;
-                }
-
-                if (IsOnCurrentBox()) { }
-                else if (IsOnNextBox())
-                {
-                    JumpResources.score++;
-                    JumpResources.TrashOldBox();
-
-                    moveCamera.MoveByABPoint(JumpResources.player.A, JumpResources.player.B);
+                    PlayerJump();
                 }
                 else
                 {
-                    if (!Setting.isCheat) SceneManager.LoadScene("Jump");
+                    jumpFreeTime++;
                 }
+
+                JumpBoxCheck();
             }
-            else if (counter == 0)
+            else
+            {
+                jumpFreeTime++;
+            }
+
+            if (counter == 0)
             {
                 if (JumpResources.player.CanGettingThinner()) JumpResources.player.GettingThinner();
             }
 
             KonamiCommand();
+
+            //Debug.Log(jumpFreeTime);
         }
 
+        private void PlayerJump()
+        {
+            float jumpDistence = Mathf.Min(Setting.jumpRate * counter, Setting.MaxJumpDistance);
+
+            if (JumpResources.boxList[JumpResources.NextBox].direction == Setting.Adirection)
+            {
+                playerControl.JumpByABVector(jumpDistence, 0);
+            }
+            else // BoxStore.BoxList[NextBox].direction == Setting.Bdirection
+            {
+                playerControl.JumpByABVector(0, jumpDistence);
+            }
+            counter = 0;
+        }
+
+        private void JumpBoxCheck()
+        {
+            if (IsOnCurrentBox()) { }
+            else if (IsOnNextBox())
+            {
+                if (JumpResources.score == 0)
+                {
+                    JumpResources.scoreRate = Setting.defaultScoreRate;
+                }
+                else if (jumpFreeTime < MaxPerfectJumpTime)
+                {
+                    JumpResources.scoreRate++;
+                }
+                else
+                {
+                    JumpResources.scoreRate = Setting.defaultScoreRate;
+                }
+                jumpFreeTime = 0;
+
+                JumpResources.score += JumpResources.scoreRate;
+                JumpResources.TrashOldBox();
+
+                moveCamera.MoveByABPoint(JumpResources.player.A, JumpResources.player.B);
+            }
+            else
+            {
+                if (!Setting.isCheat) SceneManager.LoadScene("Jump");
+            }
+        }
 
         private bool IsOnCurrentBox()
         {

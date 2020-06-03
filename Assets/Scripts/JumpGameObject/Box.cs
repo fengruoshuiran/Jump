@@ -33,7 +33,7 @@ namespace Jump
 
         public void SetRandomColor()
         {
-            gameObject.GetComponent<SpriteRenderer>().color = new Color(Random.value, Random.value, Random.value);
+            SetRandomLightColor();
         }
 
         public void ChangeAlphaColorFull()
