@@ -67,8 +67,6 @@ namespace Jump
             }
 
             KonamiCommand();
-
-            //Debug.Log(jumpFreeTime);
         }
 
         private void PlayerJump()

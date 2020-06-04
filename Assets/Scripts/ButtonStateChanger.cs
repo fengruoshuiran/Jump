@@ -33,20 +33,17 @@ namespace Jump
                 Pause();
             }
 
-            if (!IsFading())
+            if (!IsFading() && latePushStateFlag == PlayState && JumpResources.isPause == true)
             {
-                if (latePushStateFlag == PauseState && JumpResources.isPause != true)
-                {
-                    JumpResources.isPause = true;
-                }
-                else if (latePushStateFlag == PlayState && JumpResources.isPause == true)
-                {
-                    JumpResources.isPause = false;
-                }
+                JumpResources.isPause = false;
+            }
+            if (latePushStateFlag == PauseState && JumpResources.isPause != true)
+            {
+                JumpResources.isPause = true;
             }
         }
 
-        public void GameStart()
+            public void GameStart()
         {
             ChangeButtonSpriteToPlay();
             GetComponent<FadeSprite>().FadeIn(MinAlpha, MaxAlpha);
