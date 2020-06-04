@@ -14,15 +14,14 @@ namespace Jump
         private float aimAPosition;
         private float aimBPosition;
 
-        // Start is called before the first frame update
-        void Start()
+        private void Start()
         {
             ControlLock = false;
 
             JumpResources.player.SetPlayerInitSetting();
         }
 
-        void Update()
+        private void Update()
         {
             if (isJumping)
             {
@@ -80,7 +79,7 @@ namespace Jump
         {
             isJumping = true;
             ControlLock = true;
-            leftMoveFrame = Setting.MoveTime;
+            leftMoveFrame = Setting.AnimationTime;
             fullMoveFrame = leftMoveFrame;
         }
         private void SlideStart(float aVector, float bVector)

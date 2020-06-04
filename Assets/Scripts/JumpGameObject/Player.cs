@@ -13,6 +13,9 @@ namespace Jump
         private const float ScaleFatterPerFrame = Setting.MaxPlayerScaleChangeRate / Setting.MaxJumpTime;
         private const float ScaleThinnerPerFrame = Setting.MaxPlayerScaleChangeRate / Setting.MaxRecoveryTime;
 
+        private const float NoneAlphaColor = 0F;
+        private const float FullAlphaColor = 1F;
+
         public Player(GameObject boxGameObject) : base(boxGameObject)
         {
             OffsetA = 0;
@@ -32,6 +35,8 @@ namespace Jump
         public void SetPlayerInitSetting()
         {
             SetRandomLightColor();
+            SetPlayerAlphaColorNone();
+            gameObject.GetComponent<FadeSprite>().FadeIn(NoneAlphaColor, FullAlphaColor);
         }
 
 
@@ -63,6 +68,13 @@ namespace Jump
             {
                 gameObject.transform.localScale = new Vector3(localScale.x - ScaleThinnerPerFrame, localScale.y + ScaleThinnerPerFrame, localScale.z);
             }
+        }
+
+        private void SetPlayerAlphaColorNone()
+        {
+            var color = gameObject.GetComponent<SpriteRenderer>().color;
+
+            gameObject.GetComponent<SpriteRenderer>().color = new Color(color.r, color.g, color.b, NoneAlphaColor);
         }
     }
 }

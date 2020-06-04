@@ -13,14 +13,10 @@ namespace Jump
         private float aimAPosition;
         private float aimBPosition;
 
-        // Start is called before the first frame update
-        void Start()
-        {
-            
-        }
+        private const int MoveTime = Setting.AnimationTime;
 
-        // Update is called once per frame
-        void Update()
+
+        private void Update()
         {
             if (isSliding)
             {
@@ -70,7 +66,7 @@ namespace Jump
         private void SlideStart(float aVector, float bVector)
         {
             isSliding = true;
-            leftMoveFrame = Setting.MoveTime;
+            leftMoveFrame = MoveTime;
             SlideAVectorPerFrame = aVector / leftMoveFrame;
             SlideBVectorPerFrame = bVector / leftMoveFrame;
         }

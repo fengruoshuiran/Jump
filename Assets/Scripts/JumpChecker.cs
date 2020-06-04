@@ -14,13 +14,12 @@ namespace Jump
         private int jumpFreeTime;
         private int konamiCommandCounter;
 
-        private const int MaxPerfectJumpTime = Setting.MoveTime * 2;
+        private const int MaxPerfectJumpTime = Setting.AnimationTime * 2;
 
         private const float MaxPlayerOffsetOnBoxA = 1.851013236F;
         private const float MaxPlayerOffsetOnBoxB = 1.851013236F;
 
-        // Start is called before the first frame update
-        void Start()
+        private void Start()
         {
             playerControl = JumpResources.player.gameObject.GetComponent<PlayerControl>();
             moveCamera = JumpResources.mainCamera.gameObject.GetComponent<MoveCamera>();
@@ -30,9 +29,13 @@ namespace Jump
             konamiCommandCounter = 0;
         }
 
-        // Update is called once per frame
-        void Update()
+        private void Update()
         {
+            if (JumpResources.isPause)
+            {
+                return;
+            }
+
             if (!playerControl.ControlLock)
             {
                 if (Input.GetKey(Setting.jumpKey))

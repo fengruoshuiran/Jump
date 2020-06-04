@@ -9,25 +9,20 @@ namespace Jump
 {
     public class BoxCreater : MonoBehaviour
     {
-        // Bad way to get gameobject
         private const float MinBoxDistance = Setting.Rate * 5;
         private const float MaxBoxDistance = Setting.Rate * 10;
 
-        // Start is called before the first frame update
-        void Start()
+        private void Start()
         {
             GameObject currentBoxGameObject = GameObject.Find("/Box1");
 
             var currentBox = new Box(currentBoxGameObject, 0, 0, true);
 
-            JumpResources.boxCreated++;
-            currentBox.SetBoxInitSettings();
             currentBox.ChangeAlphaColorFull();
             JumpResources.boxList.Add(currentBox);
         }
 
-        // Update is called once per frame
-        void Update()
+        private void Update()
         {
             if (JumpResources.boxList.Count < JumpResources.MaxBoxCount)
             {
@@ -52,15 +47,10 @@ namespace Jump
         public Box CreateBoxByABOffset(float OffsetA, float OffsetB, bool dir)
         {
             var lastBox = JumpResources.boxList[JumpResources.lastBox];
-            var newBoxGameObject = GameObject.Instantiate(lastBox.gameObject);
+            var newBoxGameObject = Instantiate(lastBox.gameObject);
             var a = OffsetA + lastBox.A;
             var b = OffsetB + lastBox.B;
             var newBox = new Box(newBoxGameObject, a, b, dir);
-
-            // Waring: Maybe out of Range
-            JumpResources.boxCreated++;
-
-            newBox.SetBoxInitSettings();
 
             return newBox;
         }

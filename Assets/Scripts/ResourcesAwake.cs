@@ -6,7 +6,7 @@ namespace Jump
 {
     public class ResourcesAwake : MonoBehaviour
     {
-        void Awake()
+        private void Awake()
         {
             LoadPrefabs();
             LoadResources();
@@ -14,11 +14,11 @@ namespace Jump
 
         private void LoadPrefabs()
         {
-            var playerPrefab = Resources.Load("Player") as GameObject;
+            var playerPrefab = Resources.Load("Prefabs/Player") as GameObject;
             var player = Instantiate(playerPrefab);
             player.name = "Player";
 
-            var boxPrefab = Resources.Load("Box") as GameObject;
+            var boxPrefab = Resources.Load("Prefabs/Box") as GameObject;
             var box = Instantiate(boxPrefab);
             box.name = "Box1";
         }

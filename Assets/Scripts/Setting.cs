@@ -14,11 +14,13 @@ namespace Jump
         public const float MaxPlayerScaleChangeRate = 0.5F;
 
         public const int FrameRate = 60;
-        public const int MoveTime = FrameRate / 2;
+        public const int AnimationTime = FrameRate / 2;
         public const int MaxJumpTime = (int)(MaxJumpDistance / jumpRate);
-        public const int MaxRecoveryTime = MoveTime / 2;
+        public const int MaxRecoveryTime = AnimationTime / 2;
 
         public const KeyCode jumpKey = KeyCode.Space;
+        public const KeyCode playKey = KeyCode.Space;
+        public const KeyCode pauseKey = KeyCode.Escape;
 
         public const int defaultScoreRate = 1;
 

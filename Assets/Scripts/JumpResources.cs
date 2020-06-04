@@ -15,16 +15,19 @@ namespace Jump
         public static int score;
         public static int scoreRate;
 
-        public static int boxCreated ;
+        public static int boxCreated;
+
+        public static bool isPause;
 
         public const int CurrentBox = 0;
         public const int NextBox = 1;
+        public const int TooOldBox = 0;
         public static int lastBox
         {
             get { return boxList.Count - 1; }
         }
 
-        public const int MaxBoxCount = 10;
+        public const int MaxBoxCount = 2;
 
         public static void Awake()
         {
@@ -38,16 +41,25 @@ namespace Jump
 
             boxCreated = 0;
 
+            isPause = true;
+
             Application.targetFrameRate = Setting.FrameRate;
         }
 
         public static void TrashOldBox()
         {
-            boxList[JumpResources.CurrentBox].ChangeAlphaColorQuarter();
-            boxList[JumpResources.NextBox].ChangeAlphaColorFull();
+            boxList[CurrentBox].ChangeAlphaColorQuarter();
+            boxList[NextBox].ChangeAlphaColorFull();
 
-            trashBoxList.Add(JumpResources.boxList[JumpResources.CurrentBox]);
-            boxList.RemoveAt(JumpResources.CurrentBox);
+            trashBoxList.Add(boxList[CurrentBox]);
+
+            if (trashBoxList.Count >= MaxBoxCount)
+            {
+                trashBoxList[TooOldBox].Death();
+                trashBoxList.RemoveAt(TooOldBox);
+            }
+
+            boxList.RemoveAt(CurrentBox);
         }
     }
 }

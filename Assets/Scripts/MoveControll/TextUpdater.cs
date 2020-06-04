@@ -19,11 +19,10 @@ namespace Jump
         private bool isFloating = false;
 
         private const float FloatDistance = 200;
-        private const float FloatPerFrame = FloatDistance / Setting.MoveTime;
-        private const float colorAPerFrame = 1.0F / Setting.MoveTime;
+        private const float FloatPerFrame = FloatDistance / Setting.AnimationTime;
+        private const float colorAPerFrame = 1.0F / Setting.AnimationTime;
 
-        // Start is called before the first frame update
-        void Start()
+        private void Start()
         {
             preScore = JumpResources.score;
 
@@ -35,8 +34,7 @@ namespace Jump
             ResetAddScoreText("");
         }
 
-        // Update is called once per frame
-        void Update()
+        private void Update()
         {
             if (JumpResources.score != preScore)
             {
@@ -86,7 +84,7 @@ namespace Jump
 
         private void AddScoreTextFloatStart()
         {
-            leftFloatingTime = Setting.MoveTime;
+            leftFloatingTime = Setting.AnimationTime;
             isFloating = true;
         }
 
