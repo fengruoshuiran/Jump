@@ -58,3 +58,9 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+*.14f1 (2b330bf6d2d8)
+*.d
+*.o
+SwitchIL2CPPCache/il2cpp_cache/linkresult_0E49CF4A2FBCBCF798BE32D247C5E853/SwitchPlayer.nss
+SwitchIL2CPPStats/profile.json
+SwitchIL2CPPStats/statistics.txt
