@@ -18,9 +18,9 @@ namespace Jump
         public const int MaxJumpTime = (int)(MaxJumpDistance / jumpRate);
         public const int MaxRecoveryTime = AnimationTime / 2;
 
-        public const KeyCode jumpKey = KeyCode.Space;
-        public const KeyCode playKey = KeyCode.Space;
-        public const KeyCode pauseKey = KeyCode.Escape;
+        public const KeyCode jumpKey = KeyCode.Joystick1Button1; // A
+        public const KeyCode playKey = KeyCode.Joystick1Button1; // A
+        public const KeyCode pauseKey = KeyCode.Joystick1Button0; // B
 
         public const int defaultScoreRate = 1;
 
